@@ -1,0 +1,121 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Forest Reserve Coverage in Malaysia (2021)",
+    "fontSize": 22,
+    "font": "Arial",
+    "anchor": "middle"
+  },
+  "width": 800,
+  "height": 600,
+  "projection": {
+    "type": "conicEqualArea",
+    "center": [110, 3],
+    "parallels": [1, 7],
+    "scale": 2000
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#000000",
+        "strokeWidth": 3,
+        "fill": "#ffffff"
+      },
+      "encoding": {
+        "x": {"value": 0},
+        "y": {"value": 0},
+        "x2": {"value": 800},
+        "y2": {"value": 600}
+      }
+    },
+    {
+  "data": {
+    "graticule": {
+      "step": [5, 5]   
+      }
+    },
+    "mark": {
+      "type": "geoshape",
+      "stroke": "#dddddd",
+      "strokeWidth": 0.5,
+      "fill": null
+    },
+    "projection": {
+      "type": "conicEqualArea",
+      "center": [110, 3],
+      "parallels": [1, 7],
+      "scale": 2000
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-w9-homework/main/js/ne_10m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-w9-homework/main/data/forest_reserve_cleaned.csv"
+            },
+            "key": "state",
+            "fields": ["area"]
+          }
+        },
+        {
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-w9-homework/main/data/malaysia_state_area.csv"
+            },
+            "key": "state",
+            "fields": ["total_area_km2"]
+          }
+        },
+        {
+          "calculate": "datum.area / (datum.total_area_km2 * 100)",
+          "as": "forest_pct"
+        },
+        {
+          "calculate": "datum.forest_pct <= 0.05 ? 'Very Low (0–5%)' : datum.forest_pct <= 0.20 ? 'Low (5–20%)' : datum.forest_pct <= 0.35 ? 'Medium (20–35%)' : datum.forest_pct <= 0.45 ? 'High (35–45%)' : 'Very High (45%+)'",
+          "as": "forest_class"
+        }
+      ],
+      "mark": {"type": "geoshape", "stroke": "#aaaaaa", "strokeWidth": 0.7},
+      "encoding": {
+        "color": {
+          "field": "forest_class",
+          "type": "nominal",
+          "title": "Forest Reserve Coverage (%)",
+          "scale": {
+            "domain": [
+              "Very Low (0–5%)",
+              "Low (5–20%)",
+              "Medium (20–35%)",
+              "High (35–45%)",
+              "Very High (45%+)"
+            ],
+            "range": ["#f7fcf5", "#c7e9c0", "#74c476", "#31a354", "#006d2c"]
+          }
+        },
+        "tooltip": [
+          {"field": "properties.name", "type": "nominal", "title": "State"},
+          {"field": "area", "type": "quantitative", "title": "Forest Reserve (ha)"},
+          {"field": "total_area_km2", "type": "quantitative", "title": "Total Area (km²)"},
+          {
+            "field": "forest_pct",
+            "type": "quantitative",
+            "title": "% of State Area",
+            "format": ".1%"
+          },
+          {"field": "forest_class", "type": "nominal", "title": "Class"}
+        ]
+      }
+    }
+  ]
+}
