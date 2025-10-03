@@ -52,7 +52,10 @@
           "endAngle": {"field": "a1"},
           "innerRadius": {"field": "r0"},
           "outerRadius": {"field": "r1"},
-          "fill": {"scale": "color", "field": "parent"},
+          "fill": { "signal": "scale('baseColor', datum.parent)"},
+          "fillOpacity": {
+           "signal": "datum.depth == 2 ? scale('lightness', datum.value) : 1" 
+        },
           "stroke": {"value": "white"},
           "tooltip": {
             "signal": "'Pollutant/Year: ' + datum.id + '\\n' + 'Category: ' + datum.parent + '\\n' + 'Value: ' + datum.scaled_value"
@@ -63,10 +66,17 @@
   ],
   "scales": [
     {
-      "name": "color",
+      "name": "baseColor",
       "type": "ordinal",
       "domain": {"data": "tree", "field": "parent"},
       "range": {"scheme": "tableau20"}
-    }
+    },
+    {
+    "name": "lightness",
+    "type": "linear",
+    "domain": {"data": "tree", "field": "scaled_value"},
+    "range": [0.4, 1],   
+    "clamp": true
+  }
   ]
 }
