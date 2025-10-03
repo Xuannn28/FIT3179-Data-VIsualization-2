@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "width": 600,
+  "width": 800,
   "height": 600,
   "padding": 5,
   "title": {
@@ -12,7 +12,14 @@
     {
       "name": "pollutants",
       "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/main/data/pollutants_cleaned.csv",
-      "format": {"type": "csv"}
+      "format": {"type": "csv"},
+      "transform": [
+        {
+          "type": "formula",
+          "as": "scaled_value",
+          "expr": "datum.value"
+        }
+      ]
     },
     {
       "name": "tree",
@@ -25,8 +32,8 @@
         },
         {
           "type": "partition",
-          "field": "value",
-          "sort": {"field": "value", "order": "descending"},
+          "field": "scaled_value",
+          "sort": {"field": "scaled_value", "order": "descending"},
           "size": [6.28318, 250],
           "as": ["a0", "r0", "a1", "r1", "depth", "children"]
         }
@@ -45,10 +52,10 @@
           "endAngle": {"field": "a1"},
           "innerRadius": {"field": "r0"},
           "outerRadius": {"field": "r1"},
-          "fill": {"scale": "color", "field": "id"},
+          "fill": {"scale": "color", "field": "parent"},
           "stroke": {"value": "white"},
           "tooltip": {
-            "signal": "'Pollutant/Year: ' + datum.id + '\\n' + 'Category: ' + datum.parent + '\\n' + 'Value: ' + datum.value"
+            "signal": "'Pollutant/Year: ' + datum.id + '\\n' + 'Category: ' + datum.parent + '\\n' + 'Value: ' + datum.scaled_value"
           }
         }
       }
@@ -58,7 +65,7 @@
     {
       "name": "color",
       "type": "ordinal",
-      "domain": {"data": "tree", "field": "id"},
+      "domain": {"data": "tree", "field": "parent"},
       "range": {"scheme": "tableau20"}
     }
   ]
