@@ -1,66 +1,45 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Heatmap of average pollution vs. temperature range for different stations over the years.",
-  "title": "Pollution vs. Temperature Range (2000–2002)",
+  "title": "Overview + Detail: Pollution vs Temperature (2000–2002)",
   "data": {
-    "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/main/data/pollution_temp_heatmap.csv"
+    "url": "harmonized_pollution_temp.csv"
   },
-  "transform": [
+  "vconcat": [
     {
-      "filter": "station == null || datum['Selected Stations'] == station"
-    }
-  ],
-  "params": [
+      "width": 600,
+      "height": 150,
+      "mark": "line",
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal", "title": "Year"},
+        "y": {"field": "AvgPollution", "type": "quantitative", "title": "Average Pollution (PM Index)"},
+        "color": {"field": "State", "type": "nominal", "legend": {"title": "State"}}
+      },
+      "selection": {
+        "brush": {"type": "interval", "encodings": ["x"]}
+      },
+      "transform": [
+        {"filter": "datum.AvgPollution != null"}
+      ]
+    },
     {
-      "name": "station",
-      "value": null,
-      "bind": {
-        "input": "select",
-        "options": [
-          null,
-          "bandaraya melaka, melaka",
-          "larkin, johor bahru",
-          "seberang jaya, pulau pinang"
-        ],
-        "labels": [
-          "All Stations",
-          "Bandaraya Melaka",
-          "Larkin, Johor Bahru",
-          "Seberang Jaya, Pulau Pinang"
-        ],
-        "name": "Select Station: "
-      }
+      "width": 600,
+      "height": 250,
+      "mark": "circle",
+      "encoding": {
+        "x": {"field": "MeanTemp", "type": "quantitative", "title": "Mean Temperature (°C)"},
+        "y": {"field": "AvgPollution", "type": "quantitative", "title": "Average Pollution (PM Index)"},
+        "color": {"field": "State", "type": "nominal"},
+        "tooltip": [
+          {"field": "Year"},
+          {"field": "Selected Stations"},
+          {"field": "AvgPollution"},
+          {"field": "MeanTemp"},
+          {"field": "State"}
+        ]
+      },
+      "transform": [
+        {"filter": {"selection": "brush"}}
+      ]
     }
-  ],
-  "mark": "rect",
-  "encoding": {
-    "x": {
-      "field": "Year",
-      "type": "ordinal",
-      "title": "Year",
-      "axis": {"labelAngle": -45}
-    },
-    "y": {
-      "field": "TempRange",
-      "type": "ordinal",
-      "title": "Temperature Range (°C)"
-    },
-    "color": {
-      "field": "AvgPollution",
-      "type": "quantitative",
-      "title": "Average Pollution Level",
-      "scale": {"scheme": "reds"}
-    },
-    "tooltip": [
-      {"field": "Year"},
-      {"field": "Selected Stations", "title": "Station"},
-      {"field": "AvgPollution", "title": "Average Pollution"},
-      {"field": "MeanTemp", "title": "Mean Temperature (°C)"},
-      {"field": "TempRange", "title": "Temp Range"}
-    ]
-  },
-  "config": {
-    "axis": {"labelFontSize": 12, "titleFontSize": 14},
-    "title": {"fontSize": 18, "anchor": "middle"}
-  }
+  ]
 }
