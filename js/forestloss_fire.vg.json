@@ -1,0 +1,120 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Stacked area chart showing total tree cover loss vs fire-related loss (2001–2024) with a year slider.",
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/treecover_loss_from_fires.csv"
+  },
+  "params": [
+    {
+      "name": "yearSlider",
+      "value": 2024,
+      "bind": {
+        "input": "range",
+        "min": 2001,
+        "max": 2024,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "datum.umd_tree_cover_loss__ha - datum.umd_tree_cover_loss_from_fires__ha",
+      "as": "non_fire_loss"
+    },
+    {
+      "fold": [
+        "umd_tree_cover_loss_from_fires__ha",
+        "non_fire_loss"
+      ],
+      "as": ["type", "loss"]
+    },
+    {
+      "calculate": "datum.loss / 1000", 
+      "as": "loss_kha"
+    },
+    {
+      "calculate": "datum.type == 'umd_tree_cover_loss_from_fires__ha' ? 'From Fires' : 'Other Causes'",
+      "as": "loss_type_label"
+    },
+    {
+      "filter": "datum.umd_tree_cover_loss__year <= yearSlider"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+          "type": "area",
+          "line": {"color": "white", "width": 0.5}
+        },
+        "encoding": {
+          "x": {
+            "field": "umd_tree_cover_loss__year",
+            "type": "quantitative",
+            "title": "Year",
+            "axis": {"labelAngle": -40,  "format": "d", "tickCount": 10 , "grid": false}
+          },
+          "y": {
+            "aggregate": "sum",
+            "field": "loss_kha",
+            "title": "Tree Cover Loss (kha)"
+          },
+          "color": {
+            "field": "type",
+            "type": "nominal",
+            "title": "Loss Type",
+            "scale": {
+              "domain": ["non_fire_loss", "umd_tree_cover_loss_from_fires__ha"],
+              "range": ["#d3d3d3", "#d73027"]
+
+            },
+            "legend": {
+              "title": "Loss Type",
+              "orient": "top-left",
+              "labelExpr": "datum.label == 'umd_tree_cover_loss_from_fires__ha' ? 'From Fires' : 'Other Causes'"
+            }
+          },
+          "tooltip": [
+            {"field": "umd_tree_cover_loss__year", "title": "Year"},
+            {"field": "loss_type_label", "title": "Type"},
+            {"field": "loss_kha", "aggregate": "sum", "title": "Loss (kha)", "format": ".1f"}
+          ]
+        }
+    }, 
+    {
+      "mark": {"type": "rule", "color": "#555", "strokeDash": [4,2], "strokeWidth": 1.0},
+      "encoding": {"x": {"datum": 2016}}
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dx": 5,
+        "dy": -10,
+        "fontSize": 12,
+        "font": "Arial",
+        "color": "#333"
+      },
+      "encoding": {
+        "x": {"datum": 2016},
+        "y": {"datum": 400},  
+        "text": {
+          "value": ["2016: 20.4 kha lost to fires", "(3.6% of total loss)"]
+        }
+      }
+    }
+  ],
+  
+  "title": {
+    "text": "Tree Cover Loss Composition (2001–2024)",
+    "anchor": "start",
+    "fontSize": 18
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"labelFontSize": 12, "titleFontSize": 14}
+  }
+}

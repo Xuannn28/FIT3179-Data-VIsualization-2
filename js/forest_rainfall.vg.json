@@ -1,0 +1,51 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heat map showing rainfall intensity and forest area across states and years.",
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/forest_rainfall_scatter.csv"
+  },
+  "mark": {"type": "rect", "stroke": "white", "strokeWidth": 0.5},
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {"labelAngle": 0}
+    },
+    "y": {
+      "field": "state",
+      "type": "ordinal",
+      "sort": "-x",
+      "title": "State"
+    },
+    "color": {
+      "field": "Total Rainfall in millimetres",
+      "type": "quantitative",
+      "title": "Total Rainfall (mm)",
+      "scale": {"scheme": "blues"}
+    },
+    "opacity": {
+      "field": "area",
+      "type": "quantitative",
+      "title": "Forest Area (ha)",
+      "scale": {"domain": [0, 5000000], "range": [0.4, 1]}
+    },
+    "tooltip": [
+      {"field": "state", "type": "nominal"},
+      {"field": "Year", "type": "ordinal"},
+      {"field": "Total Rainfall in millimetres", "type": "quantitative"},
+      {"field": "area", "type": "quantitative", "title": "Forest Area (ha)"}
+    ]
+  },
+  "title": {
+    "text": "Rainfall Intensity and Forest Area by State and Year (2003–2021)",
+    "anchor": "start",
+    "fontSize": 18
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"labelFontSize": 12, "titleFontSize": 14}
+  }
+}

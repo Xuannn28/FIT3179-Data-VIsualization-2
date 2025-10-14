@@ -1,0 +1,115 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/treecover_loss__ha.csv"
+  },
+  "title": {
+    "text": "Normalized Forest Cover Loss and CO₂ Emissions (2001–2024)", 
+    "fontSize": 18,
+    "font": "Arial",
+    "anchor": "start"
+  },
+  "params": [
+    {
+      "name": "selected_year",
+      "value": 2024,
+      "bind": {
+        "input": "range",
+        "min": 2001,
+        "max": 2024,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.umd_tree_cover_loss__year <= selected_year"},
+    {
+      "fold": [
+        "umd_tree_cover_loss__ha",
+        "gfw_gross_emissions_co2e_all_gases__Mg"
+      ],
+      "as": ["Indicator", "Value"]
+    },
+    {
+      "calculate": "datum.Indicator == 'umd_tree_cover_loss__ha' ? 'Tree Cover Loss (ha)' : 'CO₂ Emissions (Mg)'",
+      "as": "IndicatorLabel"
+    },
+    {
+      "joinaggregate": [
+        {"op": "min", "field": "Value", "as": "minValue"},
+        {"op": "max", "field": "Value", "as": "maxValue"}
+      ],
+      "groupby": ["Indicator"]
+    },
+    {
+      "calculate": "(datum.Value - datum.minValue) / (datum.maxValue - datum.minValue)",
+      "as": "NormalizedValue"
+    }
+  ],
+  "encoding": {
+    "x": {"field": "umd_tree_cover_loss__year", "type": "ordinal", "title": "Year","axis": {"labelAngle": -40}},
+    "y": {"field": "NormalizedValue", "type": "quantitative", "title": "Normalized Value (0–1)"}
+  },
+  "layer": [
+    {
+      "mark": {"type": "line", "point": true, "strokeWidth": 2},
+      "encoding": {
+        "color": {
+          "field": "IndicatorLabel",
+          "type": "nominal",
+          "title": "Indicator",
+          "scale": {
+            "domain": ["Tree Cover Loss (ha)", "CO₂ Emissions (Mg)"],
+            "range": ["#7B1FA2", "#FFA500"]
+
+          }
+        },
+        "tooltip": [
+          {"field": "umd_tree_cover_loss__year", "title": "Year"},
+          {"field": "IndicatorLabel", "title": "Indicator"},
+          {"field": "Value", "title": "Absolute Value", "format": ",.0f"},
+          {"field": "NormalizedValue", "title": "Normalized Value", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -5,
+        "fontSize": 13.5,
+        "fontStyle": "italic",
+        "color": "#2c2b2b"
+
+      },
+      "transform": [
+        {
+          "filter": "(datum.umd_tree_cover_loss__year == 2017 && datum.Indicator == 'umd_tree_cover_loss__ha') || (datum.umd_tree_cover_loss__year == 2014 && datum.Indicator == 'umd_tree_cover_loss__ha')"
+        }
+      ],
+      "encoding": {
+        "text": {
+          "condition": [
+            {
+              "test": "datum.umd_tree_cover_loss__year == 2017",
+              "value": "Post-2017 decline - slowing forest loss and emissions"
+            },
+            {
+              "test": "datum.umd_tree_cover_loss__year == 2014",
+              "value": "Highest Forest Loss (2014)"
+            }
+          ],
+          "value": ""
+        }
+      }
+    }
+  ],
+  "config": {
+    "axis": {"labelFontSize": 12, "titleFontSize": 14},
+    "legend": {"labelFontSize": 12, "titleFontSize": 13}
+  }
+}

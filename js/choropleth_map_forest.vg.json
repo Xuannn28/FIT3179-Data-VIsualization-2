@@ -1,95 +1,70 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Forest Reserve Coverage in Malaysia (2021)",
-    "fontSize": 22,
+    "text": "Forest Reserve Coverage (2003, 2009, 2015, 2021)",
+    "fontSize": 18,
     "font": "Arial",
-    "anchor": "middle"
+    "anchor": "start"
   },
-  "width": 800,
-  "height": 600,
-  "projection": {
-    "type": "conicEqualArea",
-    "center": [110, 3],
-    "parallels": [1, 7],
-    "scale": 2000
-  },
-  "layer": [
-    {
-      "mark": {
-        "type": "rect",
-        "stroke": "#000000",
-        "strokeWidth": 3,
-        "fill": "#ffffff"
-      },
-      "encoding": {
-        "x": {"value": 0},
-        "y": {"value": 0},
-        "x2": {"value": 800},
-        "y2": {"value": 600}
-      }
-    },
-    {
-  "data": {
-    "graticule": {
-      "step": [5, 5]   
-      }
-    },
-    "mark": {
-      "type": "geoshape",
-      "stroke": "#dddddd",
-      "strokeWidth": 0.5,
-      "fill": null
-    },
+  "repeat": ["2003_class", "2009_class", "2015_class", "2021_class"],
+  "columns": 2,
+  "spacing": 20, 
+  "spec": {
+    "width": 370,
+    "height": 280,
     "projection": {
       "type": "conicEqualArea",
-      "center": [110, 3],
-      "parallels": [1, 7],
-      "scale": 2000
-      }
+      "center": [110, 4],
+      "parallels": [1, 0],
+      "scale": 1050,
+      "translate": [200, 170]
     },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-w9-homework/main/js/ne_10m.json",
-        "format": {
-          "type": "topojson",
-          "feature": "ne_10m_admin_1_states_provinces"
+    "layer": [
+      {
+        "data": { "graticule": { "step": [5, 5] } },
+        "mark": {
+          "type": "geoshape",
+          "stroke": "#dddddd",
+          "strokeWidth": 0.5,
+          "strokeOpacity": 0.8,
+          "fill": null
         }
       },
-      "transform": [
-        {
-          "lookup": "properties.name",
-          "from": {
-            "data": {
-              "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-w9-homework/main/data/forest_reserve_cleaned.csv"
-            },
-            "key": "state",
-            "fields": ["area"]
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/js/ne_10m.json",
+          "format": {
+            "type": "topojson",
+            "feature": "ne_10m_admin_1_states_provinces"
           }
         },
-        {
-          "lookup": "properties.name",
-          "from": {
-            "data": {
-              "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-w9-homework/main/data/malaysia_state_area.csv"
-            },
-            "key": "state",
-            "fields": ["total_area_km2"]
+        "transform": [
+          {
+            "lookup": "properties.name",
+            "from": {
+              "data": {
+                "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/forest_reserve_ready.csv"
+              },
+              "key": "state",
+              "fields": [
+                "state",
+                "total_area_km2",
+                "2003_pct",
+                "2009_pct",
+                "2015_pct",
+                "2021_pct",
+                "2003_class",
+                "2009_class",
+                "2015_class",
+                "2021_class"
+              ]
+            }
           }
-        },
-        {
-          "calculate": "datum.area / (datum.total_area_km2 * 100)",
-          "as": "forest_pct"
-        },
-        {
-          "calculate": "datum.forest_pct <= 0.05 ? 'Very Low (0–5%)' : datum.forest_pct <= 0.20 ? 'Low (5–20%)' : datum.forest_pct <= 0.35 ? 'Medium (20–35%)' : datum.forest_pct <= 0.45 ? 'High (35–45%)' : 'Very High (45%+)'",
-          "as": "forest_class"
-        }
-      ],
-      "mark": {"type": "geoshape", "stroke": "#aaaaaa", "strokeWidth": 0.7},
-      "encoding": {
-        "color": {
-          "field": "forest_class",
+        ],
+        "mark": { "type": "geoshape", "stroke": "#aaaaaa", "strokeWidth": 0.7 },
+        "encoding": {
+          "color": {
+          "field": { "repeat": "repeat" },
           "type": "nominal",
           "title": "Forest Reserve Coverage (%)",
           "scale": {
@@ -100,22 +75,68 @@
               "High (35–45%)",
               "Very High (45%+)"
             ],
-            "range": ["#f7fcf5", "#c7e9c0", "#74c476", "#31a354", "#006d2c"]
+            "range": ["#d9f0a3", "#addd8e", "#78c679", "#31a354", "#006837"]
           }
-        },
-        "tooltip": [
-          {"field": "properties.name", "type": "nominal", "title": "State"},
-          {"field": "area", "type": "quantitative", "title": "Forest Reserve (ha)"},
-          {"field": "total_area_km2", "type": "quantitative", "title": "Total Area (km²)"},
-          {
-            "field": "forest_pct",
-            "type": "quantitative",
-            "title": "% of State Area",
-            "format": ".1%"
           },
-          {"field": "forest_class", "type": "nominal", "title": "Class"}
-        ]
+          "tooltip": [
+            { "field": "properties.name", "title": "State" },
+            { "field": { "repeat": "repeat" }, "title": "Category" },
+            { "field": "total_area_km2", "title": "Total Area (km²)" },
+            { "field": "2003_pct", "title": "2003 Forest Reserve %", "format": ".1%" },
+            { "field": "2009_pct", "title": "2009 Forest Reserve %", "format": ".1%" },
+            { "field": "2015_pct", "title": "2015 Forest Reserve %", "format": ".1%" },
+            { "field": "2021_pct", "title": "2021 Forest Reserve %", "format": ".1%" }
+          ]
+        }
+      }, 
+      {
+        "data": {
+          "values": [
+            {
+              "2003_class": "2003",
+              "2009_class": "2009",
+              "2015_class": "2015",
+              "2021_class": "2021"
+            }
+          ]
+        },
+        "mark": {
+          "type": "text",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "align": "center",
+          "baseline": "bottom",
+          "y": 10,
+          "x": 185
+        },
+        "encoding": {
+          "text": { "field": { "repeat": "repeat" } }
+        }
+      }, 
+      {
+        "data": {
+          "values": [
+            { "state": "Johor", "longitude": 104.2, "latitude": 2.0, "label": "Johor" },
+            { "state": "Sabah", "longitude": 113.2, "latitude": 6.2, "label": "Sabah" },
+            { "state": "Sarawak", "longitude": 115.5, "latitude": 2.5, "label": "Sarawak" }
+          ]
+        },
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dx": 5,
+          "dy": 0,
+          "fontSize": 13,
+          "fontWeight":"normal",
+          "color": "#333"
+        },
+        "encoding": {
+          "longitude": { "field": "longitude", "type": "quantitative" },
+          "latitude": { "field": "latitude", "type": "quantitative" },
+          "text": { "field": "label" }
+        }
       }
-    }
-  ]
+    ]
+  },
+  "config": { "view": { "stroke": null }, "axis": { "domain": false } }
 }

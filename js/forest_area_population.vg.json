@@ -1,0 +1,115 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/merged_forest_population_malaysia.csv"
+  },
+  "title": {
+    "text": "Indexed Change of Population and Forest Area (2001–2023)",
+    "fontSize": 18,
+    "font": "Arial",
+        "anchor": "start"
+  },
+  "transform": [
+    {
+      "fold": ["Population_total", "Forest_area_percent"],
+      "as": ["Indicator", "Value"]
+    },
+    {
+      "window": [
+        {"op": "first_value", "field": "Value", "as": "BaseValue"}
+      ],
+      "groupby": ["Indicator"],
+      "sort": [{"field": "Year", "order": "ascending"}]
+    },
+    {
+      "calculate": "((datum.Value - datum.BaseValue) / datum.BaseValue) * 100",
+      "as": "ChangePercent"
+    }, 
+    {
+      "calculate": "datum.Indicator === 'Population_total' ? 'Total population' : datum.Indicator === 'Forest_area_percent' ? 'Forest area (%)' : datum.Indicator",
+      "as": "IndicatorLabel"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "width": {"band": 0.4}
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {"labelAngle": -40}
+        },
+        "y": {
+          "field": "ChangePercent",
+          "type": "quantitative",
+          "title": "Change since 2001 (%)"
+        },
+        "color": {
+          "field": "IndicatorLabel",
+          "type": "nominal",
+          "scale": {"range": ["#0072B2", "#E69F00"]},
+          "title": "Indicator"
+        },
+        "xOffset": {"field": "IndicatorLabel"},
+        "tooltip": [
+          {"field": "Year", "type": "ordinal"},
+          {"field": "IndicatorLabel", "type": "nominal", "title": "Indicator"},
+          {"field": "ChangePercent", "title": "% Change from 2001", "format": ".2f"}
+        ]
+      }
+    }, 
+    {
+      "mark": {
+        "type": "rect",
+        "color": "#ffe9ce",
+        "opacity": 0.05
+      },
+      "encoding": {
+        "x": {"datum": "2011"},
+        "x2": {"datum": "2015"},
+        "y": {"value": 0},
+        "y2": {"value": 80} 
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "#777", "strokeWidth": 1.2, "strokeDash": [4,2]},
+      "encoding": {"x": {"datum": "2011"}}
+    },
+    {
+      "mark": {"type": "rule", "color": "#777", "strokeWidth": 1.2, "strokeDash": [4,2]},
+      "encoding": {"x": {"datum": "2015"}}
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "fontSize": 12,
+        "dx": 5,
+        "dy": -10,
+        "color": "#333"
+      },
+      "encoding": {
+        "x": {"datum": "2011"},
+        "y": {"value": 30},
+        "text": {
+        "value": [
+          "Temporary rebound",
+           "(2011–2015)",
+          "May reflect", "reforestation", "efforts."
+        ]
+      }
+      }
+    }
+  ],
+  "config": {
+    "axis": {"labelFontSize": 12, "titleFontSize": 14},
+    "legend": {"labelFontSize": 12, "titleFontSize": 13}
+  }
+}

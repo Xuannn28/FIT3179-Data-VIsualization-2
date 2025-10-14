@@ -1,0 +1,125 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/tree_loss_clean.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {"op": "mean", "field": "loss_area_ha", "as": "avg_loss_area"}
+      ],
+      "groupby": ["driver_type"]
+    },
+    {
+      "joinaggregate": [
+        {"op": "sum", "field": "avg_loss_area", "as": "total_avg_loss"}
+      ]
+    },
+    {
+      "calculate": "(datum.avg_loss_area / datum.total_avg_loss) * 100",
+      "as": "percentage_loss"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 80, "outerRadius": 150},
+      "encoding": {
+        "theta": {"field": "percentage_loss", "type": "quantitative"},
+        "color": {
+          "field": "driver_type",
+          "type": "nominal",
+          "title": "Driver Type",
+          "scale": {
+            "range": [
+              "#E69F00",  
+              "#56B4E9",
+              "#CC79A7", 
+              "#F0E442",  
+              "#A6761D",  
+              "#0072B2",  
+              "#9467BD"   
+            ]},
+          "legend": {"orient": "right"}
+        },
+        "tooltip": [
+          {"field": "driver_type", "title": "Driver"},
+          {"field": "avg_loss_area", "title": "Average Loss (ha)", "format": ",.2f"},
+          {"field": "percentage_loss", "title": "Loss Percentage (%)", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "text": "Total",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "dy": -10
+      }
+    },
+    {
+      "mark": {"type": "text", "fontSize": 18, "dy": 15},
+      "encoding": {
+        "text": {"aggregate": "sum", "field": "avg_loss_area", "format": ",.0f"}
+      }
+    }, 
+    {
+      "transform": [
+        {
+          "calculate": "toString(datum.driver_type)",
+          "as": "label_name"
+        },
+        {
+          "calculate": "format(datum.percentage_loss, '.2f') + '%'",
+          "as": "label_pct"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "radius": 210,
+            "dx": -25, 
+            "dy": -30,
+            "fontSize": 13,
+            "align": "center",
+            "baseline": "middle",
+            "color": "#111"
+          },
+          "transform": [
+            {"filter": "datum.driver_type == 'Permanent agriculture' || datum.driver_type == 'Logging'"}
+          ],
+          "encoding": {
+            "theta": {"field": "percentage_loss", "type": "quantitative"},
+            "text": {"field": "label_name"},
+            "opacity": {"value": 1}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 230,
+            "dx": -45,
+            "dy": -3,
+            "fontSize": 12,
+            "align": "center",
+            "baseline": "middle",
+            "color": "#333"
+          },
+          "transform": [
+            {"filter": "datum.driver_type == 'Permanent agriculture' || datum.driver_type == 'Logging'"}
+          ],
+          "encoding": {
+            "theta": {"field": "percentage_loss", "type": "quantitative"},
+            "text": {"field": "label_pct"},
+            "opacity": {"value": 1}
+          }
+        }
+      ]
+    }
+  ],
+  "view": {"stroke": null},
+  "title": {"text": "Proportion of Forest Loss by Driver Type (2001–2024)", "fontSize": 18, "anchor": "start"}
+}
