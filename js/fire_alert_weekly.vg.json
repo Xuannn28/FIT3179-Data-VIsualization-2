@@ -68,7 +68,7 @@
         }
       ],
       "title": {
-        "text": "Select Year Range to Zoom",
+        "text": "Select Year Range to Zoom (Click and Drag)",
         "fontSize": 14,
         "anchor": "start"
       }

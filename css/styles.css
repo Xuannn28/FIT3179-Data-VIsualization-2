@@ -1,21 +1,74 @@
-/* css/styles.css */
-#choropleth_map {
-  top: 100px;
-  bottom: 100px; 
-  left: 100px;
-  right: 100px;
-  height: 900px;
-  width: 1100px;
+.vis-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 90%;
+  margin: 40px auto;
+  gap: 40px;
 }
 
-#sunburst_chart {
-  width: 1000px;
-  height: 1000px;
-
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #adcac1;
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#box_plot {
-  width: 700px;
-  height: 500px;
-  margin: auto;
+.vis-text {
+  flex: 1.1;
+  color: #000000;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.vis-text h2 {
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.vis-graphic {
+  flex: 1.4;
+  text-align: center;
+}
+
+.intro {
+  text-align: center;
+  width: 70%;
+  margin: 0 auto 30px auto;
+  color: #343736;
+  font-size: 1.3em;
+}
+.vis-group {
+  background: white;
+  margin:auto;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.vis-group .vis-row {
+  margin-bottom: 30px; /* spacing between top and bottom charts */
+}
+
+.vis-group:last-child .vis-row:last-child {
+  margin-bottom: 0; /* remove bottom spacing for last one */
+}
+
+
+/* Optional: make it stack on small screens */
+@media (max-width: 900px) {
+  .vis-row {
+    flex-direction: column;
+  }
+  .vis-graphic, .vis-text {
+    width: 100%;
+  }
 }

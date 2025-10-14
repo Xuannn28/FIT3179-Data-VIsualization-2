@@ -1,27 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malaysia’s Forest Dynamics: Climate, Fire, and Human Influence (2001–2024)</title>
+
+  <!-- Vega libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
-  
-  <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 
-
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-  
-<div id="box_plot"></div>
+  <h1 style="text-align: center;">Malaysia’s Forest Dynamics: Climate, Fire, and Human Influence (2001–2024)</h1>
+  <p class="intro" style="font-weight: 600;">
+    An overview of how Malaysia's forests evolved over two decades - shaped by climate, fires, and human pressure.
+  </p>
 
-<script type="text/javascript">
+  <div class="vis-row">
+    <div class="vis-text">
+      <h2>Shifting Shades of Green: Malaysia’s Forest Reserve Over Time (2003–2021)</h2>
+      <p>
+        Explore how forest reserves vary across states and years. Darker greens reflect regions
+        with more preserved forests — a visual reminder of conservation hotspots.
+      </p>
+      <p>
+        The maps illustrate the spatial distribution of forest reserve coverage across Malaysian states 
+        for the years <b>2003, 2009, 2015, and 2021</b>. Over this period, <b>Johor</b> shows a gradual increase 
+        in forest reserve coverage from 2003 to 2015, shifting from the <i>Low</i> to <i>Medium</i> category — 
+        likely the result of stronger local reforestation and land management programs. However, by 2021, 
+        Johor’s coverage fell notably from <b>21.8%</b> to <b>17.6%</b>, hinting at renewed pressures from 
+        urban expansion and agricultural land conversion.
+      </p>
+      <p>
+        <b>Sabah</b> consistently maintains a <i>Very High</i> level of forest reserve coverage across all years, 
+        reflecting its large share of permanent forest reserves and long-standing conservation commitments 
+        under the Sabah Forestry Department’s sustainable management framework. <b>Sarawak</b>, on the other hand, 
+        remains relatively stable within the <i>Medium</i> category, suggesting incremental progress but slower 
+        expansion compared to Sabah.
+      </p>
 
-  var spec2 = "js/box_plot_rainfall.vg.json";
-  vegaEmbed('#box_plot', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
+      <p>
+        Nationally, Malaysia remains one of the world’s key biodiversity hotspots, with forests covering nearly half of its land area.  
+        Yet, varying land-use pressures — including agriculture, urbanization, and infrastructure growth — continue to influence these patterns, especially in Peninsular Malaysia.  
+        The observed trends highlight how regional policies and economic priorities shape the pace and extent of forest conservation over time.
+    </p>
+    </div>
+    <div class="vis-graphic" id="choropleth_map"></div>
+  </div>
 
+  <div class="vis-row">
+    <div class="vis-text">
+      <h2>When Rain Meets Canopy: Linking Rainfall and Forest Coverage (2003–2021)</h2>
+      <p>
+        Each cell shows how rainfall and forest cover interact across states and years.
+        Dense blue regions suggest a healthy forest-water relationship.
+      </p>
+      <p>
+        States in Borneo - particularly Sarawak and Sabah - consistently record the highest rainfall levels and largest forest areas, 
+        reflecting the dominance of tropical rainforest ecosystems in East Malaysia. 
+        In contrast, most Peninsular states exhibit moderate rainfall and smaller forest extents, with limited year-to-year variation. 
+        The patterns suggest a weak correlation between rainfall and forest area, implying that forest coverage is more strongly influenced 
+        by other factors. According to the Malaysian Meteorological Department, long-term rainfall trends remain relatively stable nationwide, but localized 
+        deforestration and urban expansion continue to reshape microclimatic conditions.
+      </p>
+    </div>
+    <div class="vis-graphic" id="heat_map"></div>
+  </div>
+
+  <div class="vis-row">
+    <div class="vis-text">
+      <h2>Growing Cities, Shrinking Forests: Human Pressure on Nature (2001–2023)</h2>
+      <p>
+        A comparison of Malaysia’s population growth and remaining forest area.
+        How has urbanization reshaped our green landscape?
+      </p>
+    </div>
+    <div class="vis-graphic" id="bar_chart"></div>
+  </div>
+
+  <div class="vis-row">
+    <div class="vis-text">
+      <h2>What Drives the Loss? Human and Natural Causes of Deforestation (2001–2024)</h2>
+      <p>
+        The donut chart breaks down key drivers — from agriculture to wildfires — showing the
+        human footprint behind forest change.
+      </p>
+    </div>
+    <div class="vis-graphic" id="donut_chart"></div>
+  </div>
+
+  <div class="vis-row">
+    <div class="vis-text">
+      <h2>Lost Trees, Rising Carbon: Deforestation and CO₂ Emissions (2001–2024)</h2>
+      <p>
+        The multi-line chart illustrates how forest loss contributes to carbon emissions.
+        Peaks align with years of intense human and environmental pressure.
+      </p>
+    </div>
+    <div class="vis-graphic" id="line_chart"></div>
+  </div>
+
+  <div class="vis-group">
+    <div class="vis-row">
+      <div class="vis-text">
+        <h2>Rising Flames: Weekly Fire Alerts Across Malaysia (2012–2024)</h2>
+        <p>
+          A closer look at weekly fire activity. Use the overview-detail line chart to explore
+          specific spikes and their long-term patterns.
+        </p>
+      </div>
+      <div class="vis-graphic" id="multiline_chart"></div>
+    </div>
+
+    <!-- ↓ Stacked below, still part of same section -->
+    <div class="vis-row">
+      <div class="vis-text">
+        <h2>Burning Boundaries: Fire Alerts vs Forest Reserve Changes (2001–2024)</h2>
+        <p>
+          This stacked area chart compares the balance between fire frequency and forest conservation,
+          highlighting critical years of disturbance.
+        </p>
+      </div>
+      <div class="vis-graphic" id="stacked_area"></div>
+    </div>
+  </div>
+
+  <script>
+    const charts = [
+      ["#choropleth_map", "js/choropleth_map_forest.vg.json"],
+      ["#heat_map", "js/forest_rainfall.vg.json"],
+      ["#multiline_chart", "js/fire_alert_weekly.vg.json"],
+      ["#stacked_area", "js/forestloss_fire.vg.json"],
+      ["#bar_chart", "js/forest_area_population.vg.json"],
+      ["#line_chart", "js/tree_loss_annually.vg.json"],
+      ["#donut_chart", "js/tree_loss_by_drivers.vg.json"]
+    ];
+
+    charts.forEach(([id, spec]) => {
+      vegaEmbed(id, spec, { actions: false }).catch(console.error);
+    });
+  </script>
 </body>
 </html>
