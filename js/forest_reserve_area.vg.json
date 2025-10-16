@@ -4,7 +4,8 @@
     "text": "Forest Reserve Coverage (2003, 2009, 2015, 2021)",
     "fontSize": 18,
     "font": "Arial",
-    "anchor": "start"
+    "anchor": "start",
+     "color": "#555"
   },
   "repeat": ["2003_class", "2009_class", "2015_class", "2021_class"],
   "columns": 2,

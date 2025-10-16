@@ -42,7 +42,8 @@
   "title": {
     "text": "Rainfall Intensity and Forest Area by State and Year (2003–2021)",
     "anchor": "start",
-    "fontSize": 18
+    "fontSize": 18,
+     "color": "#555"
   },
   "config": {
     "view": {"stroke": "transparent"},

@@ -121,5 +121,5 @@
     }
   ],
   "view": {"stroke": null},
-  "title": {"text": "Proportion of Forest Loss by Driver Type (2001–2024)", "fontSize": 18, "anchor": "start"}
+  "title": {"text": "Proportion of Forest Loss by Driver Type (2001–2024)", "fontSize": 18, "anchor": "start", "color": "#555"}
 }

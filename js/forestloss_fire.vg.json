@@ -111,7 +111,8 @@
   "title": {
     "text": "Tree Cover Loss Composition (2001–2024)",
     "anchor": "start",
-    "fontSize": 18
+    "fontSize": 18,
+     "color": "#555"
   },
   "config": {
     "view": {"stroke": "transparent"},

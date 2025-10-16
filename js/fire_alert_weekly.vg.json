@@ -7,7 +7,8 @@
       "title": {
         "text": "Weekly Fire Alerts (2012–2024)",
         "fontSize": 18,
-        "anchor": "start"
+        "anchor": "start",
+         "color": "#555"
       },
       "data": {
         "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/malaysia_fire_alerts_clean.csv"
