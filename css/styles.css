@@ -1,3 +1,37 @@
+h1 {
+  text-align: center;
+  font-family: 'Garamond', 'Times New Roman', serif;
+  font-weight: bolder;
+}
+
+/* Full-width banner header */
+.header-container {
+  background-color: #205141;   /* dark green (you can adjust tone) */
+  color: #fff;                 /* white text for contrast */
+  text-align: center;
+  padding: 40px 20px;          /* top/bottom spacing for breathing room */
+  width: 100%;                 /* full-width bar */
+  box-sizing: border-box;      /* ensures padding doesn't exceed width */
+}
+
+/* Title styling */
+.header-container h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 2.2rem;
+  margin: 0 0 10px 0;          /* spacing below title */
+}
+
+/* Subtitle / intro text */
+.header-container .intro {
+  font-family: 'Merriweather', serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #e8f5e9;              /* softer greenish-white tone */
+  max-width: 800px;            /* keeps text nicely readable */
+  margin: 0 auto;              /* centers it horizontally */
+}
+
 .vis-row {
   display: flex;
   align-items: center;
@@ -15,7 +49,11 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background-color: #adcac1;
   margin: 20px auto;
+  margin-top: 0%;
   padding: 20px;
+  padding-top: 0%;
+  padding-left: 0%;
+  padding-right: 0%;
   display: flex;
   flex-direction: column;
   align-items: center;
