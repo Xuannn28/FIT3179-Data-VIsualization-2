@@ -29,7 +29,7 @@
       "as": "ChangePercent"
     }, 
     {
-      "calculate": "datum.Indicator === 'Population_total' ? 'Total population' : datum.Indicator === 'Forest_area_percent' ? 'Forest area (%)' : datum.Indicator",
+      "calculate": "datum.Indicator === 'Population_total' ? 'Total population (%)' : datum.Indicator === 'Forest_area_percent' ? 'Forest area (%)' : datum.Indicator",
       "as": "IndicatorLabel"
     }
   ],
