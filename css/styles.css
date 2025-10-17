@@ -1,112 +1,117 @@
-h1 {
-  text-align: center;
-  font-family: 'Garamond', 'Times New Roman', serif;
-  font-weight: bolder;
+/* ====== GENERAL RESET ====== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Full-width banner header */
-.header-container {
-  background-color: #205141;   /* dark green (you can adjust tone) */
-  color: #fff;                 /* white text for contrast */
-  text-align: center;
-  padding: 40px 20px;          /* top/bottom spacing for breathing room */
-  width: 100%;                 /* full-width bar */
-  box-sizing: border-box;      /* ensures padding doesn't exceed width */
-}
-
-/* Title styling */
-.header-container h1 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  font-size: 2.2rem;
-  margin: 0 0 10px 0;          /* spacing below title */
-}
-
-/* Subtitle / intro text */
-.header-container .intro {
-  font-family: 'Merriweather', serif;
-  font-weight: 500;
-  font-size: 1rem;
-  color: #e8f5e9;              /* softer greenish-white tone */
-  max-width: 800px;            /* keeps text nicely readable */
-  margin: 0 auto;              /* centers it horizontally */
-}
-
-.vis-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 90%;
-  margin: 40px auto;
-  gap: 40px;
-}
-
+/* ====== BODY ====== */
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #adcac1;
-  margin: 20px auto;
-  margin-top: 0%;
-  padding: 20px;
-  padding-top: 0%;
-  padding-left: 0%;
-  padding-right: 0%;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;  /* sans-serif base */
+  background-color: #e4f1ec;
+  color: #1e1e1e;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.vis-text {
-  flex: 1.1;
-  color: #000000;
-  font-size: 0.95em;
   line-height: 1.6;
 }
 
-.vis-text h2 {
-  color: #000000;
-  margin-bottom: 10px;
+/* ====== HEADER ====== */
+.header-container {
+  background-color: #205141;
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+  width: 100%;
 }
 
+.header-container h1 {
+  font-family: 'Playfair Display', 'Times New Roman', serif;  /* serif only for big title */
+  font-weight: 600;
+  font-size: 2.3rem;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+}
+
+.header-container .intro {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* sans-serif */
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #e8f5e9;
+}
+
+/* ====== VISUALIZATION SECTIONS ====== */
+main {
+  width: 100%;
+  max-width: 1100px;
+  margin: 40px auto 60px;
+  padding: 0 20px;
+}
+
+.vis-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 50px;
+  margin-bottom: 60px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.vis-section:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+/* Headings inside sections */
+.vis-section h2 {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* sans-serif for consistency */
+  font-size: 1.7rem;
+  margin-bottom: 25px;
+  color: #1b3a2a;
+  text-align: center;
+}
+
+/* ====== CHART AREA ====== */
 .vis-graphic {
-  flex: 1.4;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 25px;
   text-align: center;
 }
 
-.intro {
-  text-align: center;
-  width: 70%;
-  margin: 0 auto 30px auto;
-  color: #343736;
-  font-size: 1.3em;
-}
-.vis-group {
-  background: white;
-  margin:auto;
-  padding: 30px 40px;
-  border-radius: 12px;
-  width: 90%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/* ====== TEXT BELOW CHART ====== */
+.vis-section p {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+  text-align: justify;
+  text-align-last: center;
 }
 
-.vis-group .vis-row {
-  margin-bottom: 30px; /* spacing between top and bottom charts */
+/* ====== SUBSECTION (for Fire Section) ====== */
+.vis-section h3 {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* sans-serif */
+  font-size: 1.3rem;
+  margin: 40px 0 20px;
+  color: #205141;
 }
 
-.vis-group:last-child .vis-row:last-child {
-  margin-bottom: 0; /* remove bottom spacing for last one */
-}
-
-
-/* Optional: make it stack on small screens */
-@media (max-width: 900px) {
-  .vis-row {
-    flex-direction: column;
+/* ====== RESPONSIVENESS ====== */
+@media (max-width: 768px) {
+  .vis-section {
+    padding: 25px 20px;
   }
-  .vis-graphic, .vis-text {
-    width: 100%;
+
+  .vis-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .vis-section p {
+    font-size: 0.95rem;
+    max-width: 90%;
   }
 }

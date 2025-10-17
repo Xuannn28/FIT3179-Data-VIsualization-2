@@ -14,162 +14,87 @@
 </head>
 
 <body>
-    <div class="header-container">
-      <h1>Malaysia’s Forest Dynamics: Climate, Fire, and Human Influence (2001–2024)</h1>
-      <p class="intro">
-        An overview of how Malaysia's forests evolved over two decades — shaped by climate, fires, and human pressure.
-      </p>
-    </div>
-
-  <div class="vis-row">
-    <div class="vis-text">
-      <h2>Shifting Shades of Green: Malaysia’s Forest Reserve Over Time (2003–2021)</h2>
-      <p>
-        Explore how forest reserves vary across states and years. Darker greens reflect regions
-        with more preserved forests — a visual reminder of conservation hotspots.
-      </p>
-      <p>
-        The maps illustrate the spatial distribution of forest reserve coverage across Malaysian states 
-        for the years <b>2003, 2009, 2015, and 2021</b>. Over this period, <b>Johor</b> shows a gradual increase 
-        in forest reserve coverage from 2003 to 2015, shifting from the <i>Low</i> to <i>Medium</i> category — 
-        likely the result of stronger local reforestation and land management programs. However, by 2021, 
-        Johor’s coverage fell notably from <b>21.8%</b> to <b>17.6%</b>, hinting at renewed pressures from 
-        urban expansion and agricultural land conversion.
-      </p>
-      <p>
-        <b>Sabah</b> consistently maintains a <i>Very High</i> level of forest reserve coverage across all years, 
-        reflecting its large share of permanent forest reserves and long-standing conservation commitments 
-        under the Sabah Forestry Department’s sustainable management framework. <b>Sarawak</b>, on the other hand, 
-        remains relatively stable within the <i>Medium</i> category, suggesting incremental progress but slower 
-        expansion compared to Sabah.
-      </p>
-
-      <p>
-        Nationally, Malaysia remains one of the world’s key biodiversity hotspots, with forests covering nearly half of its land area.  
-        Yet, varying land-use pressures — including agriculture, urbanization, and infrastructure growth — continue to influence these patterns, especially in Peninsular Malaysia.  
-        The observed trends highlight how regional policies and economic priorities shape the pace and extent of forest conservation over time.
+<!-- Header -->
+  <header class="header-container">
+    <h1>Malaysia’s Forest Dynamics: Climate, Fire, and Human Influence (2001–2024)</h1>
+    <p class="intro">
+      Data-driven insights into the interplay between climate variability, fire outbreaks and deforestration across Malaysia.
     </p>
-    </div>
-    <div class="vis-graphic" id="choropleth_map"></div>
-  </div>
+  </header>
 
-  <div class="vis-row">
-    <div class="vis-text">
-      <h2>When Rain Meets Canopy: Linking Rainfall and Forest Coverage (2003–2021)</h2>
+  <main>
+    <!-- SECTION 1 -->
+    <section class="vis-section">
+      <h2>Shifting Shades of Green: Malaysia’s Forest Reserves (2003–2021)</h2>
+      <div class="vis-graphic" id="choropleth_map"></div>
       <p>
-        Each cell shows how rainfall and forest cover interact across states and years.
-        Dense blue regions suggest a healthy forest-water relationship.
+        The map highlights how forest protection varies across states. Johor shows a clear reduction in forest reserve coverage after 2015,
+        while Sabah sustains consistently high levels — reflecting stronger conservation management. These contrasts emphasize how local 
+        policies and land-use decisions shape regional forest outcomes.
       </p>
-      <p>
-        States in Borneo - particularly Sarawak and Sabah - consistently record the highest rainfall levels and largest forest areas, 
-        reflecting the dominance of tropical rainforest ecosystems in East Malaysia. 
-        In contrast, most Peninsular states exhibit moderate rainfall and smaller forest extents, with limited year-to-year variation. 
-        The patterns suggest a weak correlation between rainfall and forest area, implying that forest coverage is more strongly influenced 
-        by other factors. According to the Malaysian Meteorological Department, long-term rainfall trends remain relatively stable nationwide, but localized 
-        deforestration and urban expansion continue to reshape microclimatic conditions.
-      </p>
-    </div>
-    <div class="vis-graphic" id="heat_map"></div>
-  </div>
+    </section>
 
-  <div class="vis-row">
-    <div class="vis-text">
-      <h2>Growing Cities, Shrinking Forests: Human Pressure on Nature (2001–2023)</h2>
+    <!-- SECTION 2 -->
+    <section class="vis-section">
+      <h2>When Rain Meets Canopy: Rainfall and Forest Coverage (2003–2021)</h2>
+      <div class="vis-graphic" id="heat_map"></div>
       <p>
-        A comparison of Malaysia’s population growth and remaining forest area.
-        How has urbanization reshaped our green landscape?
+        Although rainfall remains abundant nationwide, forest coverage appears more dependent on land-use policy than on precipitation itself. 
+        Borneo states maintain high rainfall and dense forests, while Peninsular states face stability in rainfall but gradual loss in forested area — 
+        showing that deforestation is driven more by human expansion than by climate variability.
       </p>
-      <p>
-        From 2001 to 2023, total population increased steadily by nearly 50%, reflecting continuous demographic growth. In contrast, forest area 
-        experienced a persistent decline, with only a brief recovery between 2001 and 2015 - possibly linked to short-term reforestation or 
-        conservation initiatives. This divergence highlights the imbalance between human expansion and environmental regenration. Although the temporary 
-        rebound suggests some effectiveness of restoration programs, the overall negative trajectory implies that such efforts were insufficient to offset
-        long-term deforestration pressures.
-      </p>
-    </div>
-    <div class="vis-graphic" id="bar_chart"></div>
-  </div>
+    </section>
 
-  <div class="vis-row">
-    <div class="vis-text">
-      <h2>What Drives the Loss? Human and Natural Causes of Deforestation (2001–2024)</h2>
+    <!-- SECTION 3 -->
+    <section class="vis-section">
+      <h2>Growing Cities, Shrinking Forests: Human Pressure (2001–2023)</h2>
+      <div class="vis-graphic" id="bar_chart"></div>
       <p>
-        The donut chart breaks down key drivers — from agriculture to wildfires — showing the
-        human footprint behind forest change.
+        Population growth outpaces forest preservation, illustrating how urbanization and agriculture expansion continue to reduce forested land. 
+        The slight recovery around 2015 suggests temporary success from reforestation programs, but the broader trend indicates sustained ecological pressure.
       </p>
-      <p>
-        Between 2001 and 2024, forest loss was overwhelming driven by permanent agriculture, accounting for nearly 74% of total deforestration. This reflects the 
-        large-scale conversion of forested land into oil palm and rubber plantations, a pattern consistent with Malaysia's agricultural expansion policies over the 
-        past two decades. Logging contributed around 20%, suggesting that commercial timber extraction remains a significant, though secondary, driver. Other factors 
-        such as infrastructure development, shifting cultivation, and wildfires collectively represented minimal shares. The dominance of agricultural conversion 
-        indicates that economic priorities continue to outweigh conservation objectives. Beyond that chart, research by the Global Forest Watch and Malaysian Forestry 
-        Department corroborates that sustainable land-use planning and stricter enforcement of agricultural zoning are essential to mitigating further forest degradation.
-      </p>
-    </div>
-    <div class="vis-graphic" id="donut_chart"></div>
-  </div>
+    </section>
 
-  <div class="vis-row">
-    <div class="vis-text">
+    <!-- SECTION 4 -->
+    <section class="vis-section">
+      <h2>What Drives the Loss? Human and Natural Causes (2001–2024)</h2>
+      <div class="vis-graphic" id="donut_chart"></div>
+      <p>
+        Agricultural expansion dominates forest loss, far exceeding impacts from logging or wildfires. 
+        This underscores how economic reliance on plantation crops continues to outweigh conservation goals in Malaysia’s land-use decisions.
+      </p>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section class="vis-section">
       <h2>Lost Trees, Rising Carbon: Deforestation and CO₂ Emissions (2001–2024)</h2>
+      <div class="vis-graphic" id="line_chart"></div>
       <p>
-        The multi-line chart illustrates how forest loss contributes to carbon emissions.
-        Peaks align with years of intense human and environmental pressure.
+        Peaks in emissions align with major deforestation years, but recent declines after 2017 indicate policy impact and improved forest management. 
+        This decoupling between tree loss and emissions suggests better recovery capacity and reduced biomass loss intensity in recent years.
       </p>
-      <p>
-        Tree cover loss and associated CO₂ emissions display a closely aligned trend, with both peaking sharply in 2014, the year of highest recorded forest loss. While 
-        interannual fluctuations are evident, a significant post-2017 decline is observed, reflecting the impact of strengthened conservation policies and shifting
-        land-use practices. Notably, emissions exhibit a steeper drop compared to tree cover loss after 2018, indicating possible improvements in forest management or reductions 
-        in biomass density loss per hectare. An unseen insight lies in the decoupling of emissions from deforestration in recent years - suggesting that not all tree loss results 
-        in proportional carbon release. This may be due to reforestation effort, slower degradation, or altered logging practices. According to Global Forest Watch and satellite
-        monitoring data, the decline also concides with intensified climate commitments
-        under international frameworks such as the Paris Agreement, which may have influenced policy enforcement in key tropical regions. 
-      </p>
-    </div>
-    <div class="vis-graphic" id="line_chart"></div>
-  </div>
+    </section>
 
-  <div class="vis-group">
-    <h2>Rising Flames: The Role of Fire in Malaysia’s Forest Story</h2>
-    <div class="vis-row">
-      <div class="vis-text">
-        <h3>Tracing the Heat: Weekly Fire Alerts (2012–2024)</h3>
-        <p>
-          A closer look at weekly fire activity. Use the overview-detail line chart to explore
-          specific spikes and their long-term patterns.
-        </p>
-        <p>
-          The weekly fire alert data reveals distinct seasonal and interannual spikes, with the most extreme fire activity 
-          occurring between 2013 and 2016 - particularly during the severe 2014 haze episode linked to regioanl dry conditions and 
-          land clearing practices. While alerts remain relatively low after 2018, preriodic surges continue, highlighting fire's persistent role 
-          in landscape disturbance. The high frequency of alerts in earlier years suggests intense, widespread burning, often associated with 
-          slash-and-burn agriculture or peatland fires. However, the number of fire alerts alone does not convey the scale of forest loss they cause. 
-          This raises a critical question: how much of this fire activity actually results in forest cover loss? 
-        </p>
-      </div>
+    <!-- SECTION 6: Fire Analysis -->
+    <section class="vis-section">
+      <h2>Rising Flames: The Role of Fire in Malaysia’s Forest Story</h2>
+
+      <h3>Tracing the Heat: Weekly Fire Alerts (2012–2024)</h3>
       <div class="vis-graphic" id="multiline_chart"></div>
-    </div>
+      <p>
+        The most intense fire periods between 2013–2016 align with regional haze crises, indicating the impact of land clearing practices. 
+        After 2018, fire activity declines, reflecting stronger enforcement and monitoring of open burning.
+      </p>
 
-    <div class="vis-row">
-      <div class="vis-text">
-        <h3>When Sparks Meet Trees: Fire Alerts and Forest Loss (2001–2024)</h3>
-        <p>
-          This stacked area chart compares the balance between fire frequency and forest conservation,
-          highlighting critical years of disturbance.
-        </p>
-
-        <p>
-          While fire alerts peaked dramatically between 2013 and 2016, their direct contribution to tree cover loss in Malaysia remains comparatively 
-          limited. This visualization shows that the majority of deforestration stems from other causes, with fire-related loss consistently representing 
-          only a small fraction annually. Even in 2016 - when fire alerts spiked and 20.4 thousand hectares were lost to fires - this accounted for just 
-          3.6% of total tree cover loss. The data suggests that although fires are frequent and intense in certain periods, they are not the dominant driver of 
-          long-term forest decline. This underscores a critical insight: fire alone does not explain the scale of deforestation observed. 
-
-        </p>
-      </div>
+      <h3>When Sparks Meet Trees: Fire Alerts and Forest Loss (2001–2024)</h3>
       <div class="vis-graphic" id="stacked_area"></div>
-    </div>
-  </div>
+      <p>
+        Despite frequent fires, only a small portion of total tree loss is fire-related. 
+        This reveals that human-driven land conversion, not fire, remains the main contributor to deforestation.
+      </p>
+    </section>
+  </main>
+
 
   <script>
     const charts = [

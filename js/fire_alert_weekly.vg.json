@@ -16,6 +16,7 @@
       "transform": [
         { "filter": { "param": "yearRange" } }
       ],
+      
       "mark": { "type": "line", "strokeWidth": 2, "color": "#ac3b1c" },
       "encoding": {
         "x": {

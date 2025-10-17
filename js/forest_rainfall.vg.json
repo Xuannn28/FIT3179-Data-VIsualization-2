@@ -1,12 +1,23 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Heat map showing rainfall intensity and forest area across states and years.",
+  "description": "Bubble heatmap showing classified rainfall and forest area (in kha) across states and years.",
   "width": 700,
   "height": 400,
   "data": {
     "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/forest_rainfall_scatter.csv"
   },
-  "mark": {"type": "rect", "stroke": "white", "strokeWidth": 0.5},
+  "transform": [
+    {
+      "calculate": "datum.area / 1000",
+      "as": "area_kha"
+    }
+  ],
+  "mark": {
+    "type": "circle",
+    "stroke": "white",
+    "strokeWidth": 0.3,
+    "opacity": 1
+  },
   "encoding": {
     "x": {
       "field": "Year",
@@ -24,26 +35,36 @@
       "field": "Total Rainfall in millimetres",
       "type": "quantitative",
       "title": "Total Rainfall (mm)",
-      "scale": {"scheme": "blues"}
+      "bin": {"maxbins": 5},
+      "scale": {
+        "range": ["#b3d9ea", "#80b1d3", "#2171b5", "#08306b"]
+      },
+      "legend": {"orient": "bottom", "direction": "horizontal"}
     },
-    "opacity": {
-      "field": "area",
+    "size": {
+      "field": "area_kha",
       "type": "quantitative",
-      "title": "Forest Area (ha)",
-      "scale": {"domain": [0, 5000000], "range": [0.4, 1]}
+      "title": "Forest Area (kha)",
+      "scale": {"domain": [0, 5000], "range": [20, 1000]},
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "titlePadding": 10,
+        "offset": 40
+      }
     },
     "tooltip": [
       {"field": "state", "type": "nominal"},
       {"field": "Year", "type": "ordinal"},
-      {"field": "Total Rainfall in millimetres", "type": "quantitative"},
-      {"field": "area", "type": "quantitative", "title": "Forest Area (ha)"}
+      {"field": "Total Rainfall in millimetres", "type": "quantitative", "title": "Total Rainfall (mm)"},
+      {"field": "area_kha", "type": "quantitative", "title": "Forest Area (kha)"}
     ]
   },
   "title": {
     "text": "Rainfall Intensity and Forest Area by State and Year (2003–2021)",
     "anchor": "start",
     "fontSize": 18,
-     "color": "#555"
+    "color": "#555"
   },
   "config": {
     "view": {"stroke": "transparent"},
