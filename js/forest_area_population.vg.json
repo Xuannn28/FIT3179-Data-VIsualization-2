@@ -10,7 +10,8 @@
     "fontSize": 18,
     "font": "Arial",
     "anchor": "start",
-     "color": "#555"
+    "color": "#333",
+    "fontWeight":700
   },
   "transform": [
     {
@@ -44,12 +45,15 @@
           "field": "Year",
           "type": "ordinal",
           "title": "Year",
-          "axis": {"labelAngle": -40}
+          "axis": {"labelAngle": -40, "titleColor": "#333"}
         },
         "y": {
           "field": "ChangePercent",
           "type": "quantitative",
-          "title": "Change since 2001 (%)"
+          "title": "Change since 2001 (%)",
+          "axis": {
+            "titleColor": "#333"
+          }
         },
         "color": {
           "field": "IndicatorLabel",

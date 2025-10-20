@@ -68,7 +68,8 @@ main {
 .vis-section h2 {
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* sans-serif for consistency */
   font-size: 1.7rem;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
+  font-weight: 700;
   color: #1b3a2a;
   text-align: center;
 }
@@ -88,8 +89,7 @@ main {
   font-size: 1rem;
   line-height: 1.8;
   color: #333;
-  text-align: justify;
-  text-align-last: center;
+  text-align: left;
 }
 
 /* ====== SUBSECTION (for Fire Section) ====== */
@@ -116,3 +116,54 @@ main {
   }
 }
 
+/* ====== FOOTER / METADATA SECTION ====== */
+.footer-container {
+  margin-top: 60px;
+  padding: 20px 40px;
+  background-color: #d8e7df;
+  border-top: 1px solid #ddd;
+  width: 100%;
+  text-align: left;
+}
+
+.footer-container h3 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.footer-container h4 {
+  margin-top: 15px;
+  color: #205141;
+  font-size: 1.1rem;
+}
+
+.footer-container p {
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.footer-container ul {
+  margin-left: 25px;
+  margin-top: 10px;
+  line-height: 1.7;
+}
+
+.footer-container a {
+  color: #1e5b3f;
+  text-decoration: none;
+}
+
+.footer-container a:hover {
+  text-decoration: underline;
+  color: #174b32;
+}
+
+.footer-note {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.7;
+}

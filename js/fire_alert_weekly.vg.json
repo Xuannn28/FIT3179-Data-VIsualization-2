@@ -7,8 +7,10 @@
       "title": {
         "text": "Weekly Fire Alerts (2012–2024)",
         "fontSize": 18,
+        "font": "Arial",
         "anchor": "start",
-         "color": "#555"
+        "color": "#333",
+        "fontWeight":700
       },
       "data": {
         "url": "https://raw.githubusercontent.com/Xuannn28/FIT3179-Data-VIsualization-2/refs/heads/main/data/malaysia_fire_alerts_clean.csv"
@@ -23,12 +25,15 @@
           "field": "alert_date",
           "type": "temporal",
           "title": "Date",
-          "axis": { "format": "%b %Y", "labelAngle": 0 ,"grid": false }
+          "axis": { "format": "%b %Y", "labelAngle": -40 ,"grid": false, "titleColor": "#333"}
         },
         "y": {
           "field": "alert__count",
           "type": "quantitative",
-          "title": "Weekly Fire Alerts (count)"
+          "title": "Weekly Fire Alerts (count)",
+          "axis": {
+            "titleColor": "#333"
+          }
         },
         "tooltip": [
           { "field": "year_month_day", "title": "Year-Month-Day" },
@@ -54,13 +59,16 @@
           "field": "alert_date",
           "type": "temporal",
           "title": "Year",
-          "axis": { "format": "%Y" , "grid": false }
+          "axis": { "format": "%Y" , "grid": false, "titleColor": "#333" }
         },
         "y": {
           "aggregate": "sum",
           "field": "alert__count",
           "type": "quantitative",
-          "title": "Total Fire Alerts"
+          "title": "Total Fire Alerts", 
+          "axis": {
+            "titleColor": "#333"
+          }
         }
       },
       "params": [
@@ -73,7 +81,7 @@
         "text": "Select Year Range to Zoom (Click and Drag)",
         "fontSize": 14,
         "anchor": "start",
-        "color": "#555"
+        "color": "#333"
       }
     }
   ],

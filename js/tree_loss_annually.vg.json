@@ -7,10 +7,11 @@
   },
   "title": {
     "text": "Normalized Forest Cover Loss and CO₂ Emissions (2001–2024)",
-    "fontSize": 18,
     "font": "Arial",
+    "fontSize": 18,
     "anchor": "start",
-    "color": "#555"
+     "color": "#333",
+     "fontWeight":700
   },
 
   "params": [
@@ -72,9 +73,10 @@
       "field": "umd_tree_cover_loss__year",
       "type": "ordinal",
       "title": "Year",
-      "axis": {"labelAngle": -40}
+      "axis": {"labelAngle": -40, "titleColor": "#333"}
     },
-    "y": {"field": "NormalizedValue", "type": "quantitative", "title": "Normalized Value (0–1)"}
+    "y": {"field": "NormalizedValue", "type": "quantitative", "title": "Normalized Value (0–1)", 
+  "axis": { "titleColor": "#333"}}
   },
 
   "layer": [
@@ -133,6 +135,6 @@
 
   "config": {
     "axis": {"labelFontSize": 12, "titleFontSize": 14},
-    "legend": {"labelFontSize": 12, "titleFontSize": 13}
+    "legend": {"labelFontSize": 12, "titleFontSize": 13, "titleColor": "#333", "titleFontWeight":"bold"}
   }
 }

@@ -23,13 +23,16 @@
       "field": "Year",
       "type": "ordinal",
       "title": "Year",
-      "axis": {"labelAngle": 0}
+      "axis": {"labelAngle": 0, "titleColor": "#333"}
     },
     "y": {
       "field": "state",
       "type": "ordinal",
       "sort": "-x",
-      "title": "State"
+      "title": "State",
+      "axis": {
+        "titleColor": "#333"
+      }
     },
     "color": {
       "field": "Total Rainfall in millimetres",
@@ -39,7 +42,7 @@
       "scale": {
         "range": ["#b3d9ea", "#80b1d3", "#2171b5", "#08306b"]
       },
-      "legend": {"orient": "bottom", "direction": "horizontal"}
+      "legend": {"orient": "bottom", "direction": "horizontal", "titleColor": "#333", "titleFontWeight":"bold"}
     },
     "size": {
       "field": "area_kha",
@@ -50,7 +53,9 @@
         "orient": "bottom",
         "direction": "horizontal",
         "titlePadding": 10,
-        "offset": 40
+        "offset": 40, 
+        "titleColor": "#333", 
+        "titleFontWeight":"bold"
       }
     },
     "tooltip": [
@@ -61,13 +66,15 @@
     ]
   },
   "title": {
-    "text": "Rainfall Intensity and Forest Area by State and Year (2003–2021)",
-    "anchor": "start",
+    "text": "Rainfall Intensity and Forest Reserve Area by State and Year (2003–2021)",
+    "font": "Arial",
     "fontSize": 18,
-    "color": "#555"
+    "anchor": "start",
+     "color": "#333",
+     "fontWeight":700
   },
   "config": {
     "view": {"stroke": "transparent"},
-    "axis": {"labelFontSize": 12, "titleFontSize": 14}
+    "axis": {"labelFontSize": 12, "titleFontSize": 14, "titleColor": "#333", "labelColor": "#333", "titleFontWeight":"bold"}
   }
 }

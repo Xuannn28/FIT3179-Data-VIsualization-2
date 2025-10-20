@@ -41,7 +41,7 @@
               "#0072B2",  
               "#9467BD"   
             ]},
-          "legend": {"orient": "right"}
+          "legend": {"orient": "right", "titleColor": "#333", "titleFontWeight":"bold"}
         },
         "tooltip": [
           {"field": "driver_type", "title": "Driver"},
@@ -121,5 +121,12 @@
     }
   ],
   "view": {"stroke": null},
-  "title": {"text": "Proportion of Forest Loss by Driver Type (2001–2024)", "fontSize": 18, "anchor": "start", "color": "#555"}
+  "title": {
+    "text": "Proportion of Forest Loss by Driver Type (2001–2024)", 
+    "font": "Arial",
+    "fontSize": 18,
+    "anchor": "start",
+     "color": "#333",
+     "fontWeight":700
+    }
 }

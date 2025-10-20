@@ -34,12 +34,15 @@
           "field": "umd_tree_cover_loss__year",
           "type": "quantitative",
           "title": "Year",
-          "axis": {"labelAngle": -40, "format": "d", "grid": false}
+          "axis": {"labelAngle": -40, "format": "d", "grid": false, "titleColor": "#333"}
         },
         "y": {
           "aggregate": "sum",
           "field": "loss_kha",
-          "title": "Tree Cover Loss (kha)"
+          "title": "Tree Cover Loss (kha)", 
+          "axis": {
+            "titleColor": "#333"
+          }
         },
         "color": {
           "field": "type",
@@ -48,6 +51,8 @@
           "scale": {"domain": ["non_fire_loss", "umd_tree_cover_loss_from_fires__ha"], "range": ["#d3d3d3", "#d73027"]},
           "legend": {
             "title": "Loss Type",
+            "titleFontWeight":"bold",
+            "titleColor":"#333",
             "orient": "top-left",
             "labelExpr": "datum.label == 'umd_tree_cover_loss_from_fires__ha' ? 'From Fires' : 'Other Causes'"
           }
@@ -91,10 +96,12 @@
     }
   ],
   "title": {
-    "text": "Tree Cover Loss Composition (2001–2024)",
-    "anchor": "start",
+    "text": "Tree Cover Loss due to Fires (2001–2024)",
+    "font": "Arial",
     "fontSize": 18,
-    "color": "#555"
+    "anchor": "start",
+     "color": "#333",
+     "fontWeight":700
   },
   "config": {
     "view": {"stroke": "transparent"},
