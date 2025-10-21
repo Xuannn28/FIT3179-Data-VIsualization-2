@@ -79,12 +79,12 @@ main {  /* keep chart centered and not too wide */
   width: 100%;
   max-width: 800px;
   margin: 0 auto 25px;
-  text-align: center;
+  text-align: left;
 }
 
 /* ====== TEXT BELOW CHART ====== */
 .vis-section p {  /* not too wide, darker text, left aligned*/
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
   font-size: 1rem;
   line-height: 1.8;
